@@ -1,0 +1,7 @@
+build/
+.vscode/
+.DS_Store
+
+credentials.cmake
+external/
+my_fsdata.c
