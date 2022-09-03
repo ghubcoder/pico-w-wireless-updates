@@ -43,8 +43,10 @@ target_include_directories(blink PRIVATE
 )
 add_subdirectory(picowota)
 target_compile_definitions( blink PRIVATE
-        WIFI_SSID=\"${WIFI_SSID}\"
-        WIFI_PASSWORD=\"${WIFI_PASSWORD}\"
+        PICOWOTA_WIFI_SSID=\"${PICOWOTA_WIFI_SSID}\"
+        PICOWOTA_WIFI_PASS=\"${PICOWOTA_WIFI_PASS}\"
+        REBOOT_USER=\"${REBOOT_USER}\"
+        REBOOT_PASS=\"${REBOOT_PASS}\"
         )
 
 pico_enable_stdio_usb(blink 1)

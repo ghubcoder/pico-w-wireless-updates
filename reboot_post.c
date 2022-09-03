@@ -133,7 +133,7 @@ err_t httpd_post_receive_data(void *connection, struct pbuf *p)
                 {
                     user[len_user] = 0;
                     pass[len_pass] = 0;
-                    if (!strcmp(user, "lwip") && !strcmp(pass, "post"))
+                    if (!strcmp(user, REBOOT_USER) && !strcmp(pass, REBOOT_PASS))
                     {
                         /* user and password are correct, create a "session" */
                         valid_connection = connection;

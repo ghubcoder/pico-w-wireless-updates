@@ -43,6 +43,7 @@ void pico_w_http_task(__unused void *params)
         return;
     }
 
+    vTaskDelay(pdMS_TO_TICKS(1000));
     printf("Enable sta mode...\n");
     cyw43_arch_enable_sta_mode();
     // this seems to be the best be can do using the predefined `cyw43_pm_value` macro:
@@ -51,13 +52,14 @@ void pico_w_http_task(__unused void *params)
     cyw43_wifi_pm(&cyw43_state, cyw43_pm_value(CYW43_NO_POWERSAVE_MODE, 20, 1, 1, 1));
 
     printf("Connecting to WiFi...\n");
-    while (cyw43_arch_wifi_connect_timeout_ms(WIFI_SSID, WIFI_PASSWORD, CYW43_AUTH_WPA2_AES_PSK, 30000))
+    while (cyw43_arch_wifi_connect_timeout_ms(PICOWOTA_WIFI_SSID, PICOWOTA_WIFI_PASS, CYW43_AUTH_WPA2_AES_PSK, 30000))
     {
         printf("failed to connect.\n");
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 
     printf("Connected.\n");
+    printf("\nReady, running httpd at %s\n", ip4addr_ntoa(netif_ip4_addr(netif_list)));
     xTaskCreate(pico_w_led_task, "LED_Task 2", 256, NULL, 1, NULL);
     httpd_init();
     ssi_init();
